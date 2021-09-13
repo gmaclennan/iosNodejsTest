@@ -69,7 +69,10 @@ const App = () => {
               </Text>
             </View>
             <View style={styles.sectionContainer}>
-              <Button title="Message Node" onPress={() => nodejs.channel.send('A message!')} />
+              <Button
+                title="Message Node"
+                onPress={() => nodejs.channel.send('A message!')}
+              />
             </View>
             <LearnMoreLinks />
           </View>
