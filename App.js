@@ -6,6 +6,7 @@
  * @flow strict-local
  */
 
+import nodejs from 'nodejs-mobile-react-native';
 import React from 'react';
 import {
   SafeAreaView,
@@ -14,6 +15,8 @@ import {
   View,
   Text,
   StatusBar,
+  Alert,
+  Button,
 } from 'react-native';
 
 import {
@@ -24,7 +27,14 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-const App: () => React$Node = () => {
+const App = () => {
+  React.useEffect(() => {
+    nodejs.start('main.js');
+    nodejs.channel.addListener('message', (msg) => {
+      Alert.alert('From node: ' + msg);
+    });
+  }, []);
+
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -59,10 +69,7 @@ const App: () => React$Node = () => {
               </Text>
             </View>
             <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
+              <Button title="Message Node" onPress={() => nodejs.channel.send('A message!')} />
             </View>
             <LearnMoreLinks />
           </View>
