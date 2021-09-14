@@ -18,6 +18,6 @@ db.put('name', 'Level', function (err) {
   if (err) return console.log('Ooops!', err); // some kind of I/O error
   // Inform react-native node is initialized.
   rn_bridge.channel.send(
-    'Node was initialized.' + err ? 'Error: ' + err.message : '',
+    'Node was initialized.' + (err ? 'Error: ' + err.message : ''),
   );
 });
